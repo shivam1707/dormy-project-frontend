@@ -46,14 +46,6 @@ const MenuComponent = () => {
           Login
         </Link>
       </Menu.Item>
-      <Menu.Item
-        key="3"
-        icon={<img src={Quiz} className="imgMenu" alt="Quiz" />}
-      >
-        <Link to="/cregister" className="textMenu">
-          Register
-        </Link>
-      </Menu.Item>
     </Menu>
   );
 };
@@ -89,7 +81,6 @@ function App() {
                   element={<Navigate to="/home" />}
                 />
                 <Route element={<Login />} path="/login" />
-                <Route element={<CustomerRegister />} path="/cregister" />
                 <Route element={<Homepage />} path="/home" />
               </Routes>
             </Content>

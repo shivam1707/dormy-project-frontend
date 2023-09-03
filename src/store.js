@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 
 const initialState = {
   // formdata: null,
+  signup: true,
   overview: true,
 };
 
@@ -12,6 +13,11 @@ const rootReducer = (state = initialState, action) => {
     //     ...state,
     //     formdata: action.payload,
     //   };
+    case "toggleSign":
+      return {
+        ...state,
+        signup: action.payload,
+      };
     case "selectedOverview":
       return {
         ...state,

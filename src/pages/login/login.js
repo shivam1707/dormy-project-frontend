@@ -19,17 +19,18 @@ import {
   notification,
 } from "antd";
 
-function CustomerRegister() {
+function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const [loader, setLoader] = useState(false);
+  const [valOtp, setValOtp] = useState(false);
   const { id } = useParams();
 
   const onFinish = async (values) => {
     console.log(values, "valuesssssssss");
     setLoader(true);
-    let { data, success, error, token, message } = await Request.register({
+    let { data, success, error, token, message } = await Request.login({
       ...values,
     });
     if (token) {
@@ -47,10 +48,14 @@ function CustomerRegister() {
     setLoader(false);
   };
 
+  const toggleOtp = () => {
+    valOtp ? setValOtp(false) : setValOtp(true);
+  };
+
   return (
     <div className="center">
       <h5 className="p-3 text-center bg-info rounded-top bg-gradient text-white">
-        Register
+        Login
       </h5>
       <Form
         form={form}
@@ -61,24 +66,9 @@ function CustomerRegister() {
         onFinish={onFinish}
         autoComplete="off"
       >
-        <Form.Item label="Mobile Number" name="mobileNo">
-          <InputNumber placeholder="Please type mobile no." />
+        <Form.Item label="Username" name="username">
+          <Input />
         </Form.Item>
-        <Form.Item label="First Name" name="firstname">
-          <Input placeholder="first name" />
-        </Form.Item>
-        <Form.Item label="Last Name" name="lastName">
-          <Input placeholder="last name" />
-        </Form.Item>
-        <Form.Item label="Email" name="email">
-          <Input placeholder="type email" />
-        </Form.Item>
-        {/* <Form.Item label="Role" name="role">
-          <Input placeholder="type role"/>
-        </Form.Item>
-        <Form.Item label="Geo Location" name="geoLocation">
-          <Input placeholder="select geo location"/>
-        </Form.Item> */}
         <Form.Item label="Password" name="password" type="password">
           <Input.Password placeholder="Password" />
         </Form.Item>
@@ -92,12 +82,13 @@ function CustomerRegister() {
           </Button>
         </Form.Item>
       </Form>
-
-      <p onClick={() => dispatch({ type: "toggleSign", payload: true })}>
-        Sign In
+      <p onClick={() => dispatch({ type: "toggleSign", payload: false })}>
+        Don't have an account! Sign Up
       </p>
+      <h4>OR</h4>
+      <Button onClick={toggleOtp}>Validate Using OTP</Button>
     </div>
   );
 }
 
-export default CustomerRegister;
+export default Login;
