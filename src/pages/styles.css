@@ -1,0 +1,44 @@
+.bodyWrapper {
+  width: 95vw;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+.search {
+  width: 30vw;
+  margin: 0 auto;
+}
+
+.search .ant-input-affix-wrapper {
+  height: 40px;
+  border-radius: 0px !important;
+  border: 1px solid;
+  display: flex;
+  margin-right: 10px;
+  padding: 10px !important;
+  width: -webkit-fill-available;
+}
+
+.search .ant-input-group-addon button {
+  height: 40px;
+  padding: 10px !important;
+  display: flex;
+  align-items: center;
+}
+
+.loginform input {
+  height: 40px;
+  padding-left: 10px !important;
+}
+
+.loginform label {
+  height: -webkit-fill-available !important
+}
+
+.buttonForm .ant-col {
+  margin: 0 auto
+}
+
+.buttonForm button {
+  width: 100% !important;
+}
