@@ -1,0 +1,17 @@
+
+.loginform input {
+  height: 40px;
+  padding-left: 10px !important;
+}
+
+.loginform label {
+  height: -webkit-fill-available !important
+}
+
+.buttonForm .ant-col {
+  margin: 0 auto
+}
+
+.buttonForm button {
+  width: 100% !important;
+}

@@ -11,8 +11,8 @@ import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "./components/Navbar";
 import Footer1 from "./components/Footer";
-import Login from "./pages/Login";
-import CustomerRegister from "./pages/CustomerRegister";
+import Login from "./pages/login";
+import CustomerRegister from "./pages/login/CustomerRegister";
 import Movies from "./pages/Movies";
 import Dashboard from "./components/assets/dashboard.png";
 import Assessment from "./components/assets/note_alt.png";
@@ -107,31 +107,3 @@ function App() {
 }
 
 export default App;
-
-// export default function App() {
-//   return (
-//    <div style={{width:"100vw"}}>
-//      <BrowserRouter>
-//      <Navbar/>
-//         <Routes>
-//           <Route element={<><Carouselslide/><Aboutus /><Footer/></>} path="/" exact />
-//           <Route element={<><SearchResult /></>} path="/search" exact />
-//           <Route element={<Login/>} path="/login" />
-//           <Route element={<CustomerRegister/>} path="/cregister" />
-//           <Route element={<CustomersList/>} path="/users" />
-//           <Route element={<Halls/>} path="/halls" />
-//           <Route element={<Movies/>} path="/movies" />
-//           <Route element={<Shows/>} path="/shows" />
-//           <Route element={<UserDetails/>} path="/udetails/:id" />
-//           <Route element={<MyBookings/>} path="/mybookings" />
-//           <Route element={<Bookings/>} path="/bookings" />
-//           <Route element={<Reports/>} path="/reports" />
-//           <Route element={<Booknow/>} path="/book/:id" />
-//           <Route element={<SeatSelect/>} path="/selectseat" />
-//           <Route element={<MyPayments/>} path="/mypayments" />
-//           <Route element={<UserProfile/>} path="/profile" />
-//         </Routes>
-//      </BrowserRouter>
-//    </div>
-//   );
-// }

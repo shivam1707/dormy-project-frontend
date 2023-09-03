@@ -1,12 +1,10 @@
 import { useState } from 'react'
 import axios from 'axios'
-import '../components/login.css'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import swal from 'sweetalert2'
 import { useDispatch } from 'react-redux'
-import { apiUrls, baseUrl } from '../lib/constants'
 import "./styles.css";
-import Request from "../request";
+import Request from "../../request";
 import {
   Button,
   Cascader,
@@ -48,26 +46,6 @@ function Login() {
     }
     setLoader(false);
   };
-
-  // const apiFunction = async () => {
-  //   setLoader(true);
-  //   let { data, success, error, message } = await Request.fetchReport(id);
-  //   if (success) {
-  //     form.setFieldsValue(data);
-  //   } else {
-  //     notification.error({
-  //       message: message || "Some Error Occured",
-  //     });
-  //   }
-  //   setLoader(false);
-  // };
-
-  // useEffect(() => {
-  //   if (id) {
-  //     apiFunction();
-  //   }
-  // }, [id]);
-
 
   return (
     <div className='center'>
