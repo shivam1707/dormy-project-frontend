@@ -1,0 +1,49 @@
+.loginform input {
+  height: 40px;
+  padding-left: 10px !important;
+}
+
+.loginform label {
+  height: -webkit-fill-available !important;
+}
+
+.buttonForm .ant-col {
+  margin: 0 auto;
+}
+
+.buttonForm button {
+  width: 100% !important;
+}
+
+.center {
+  width: 450px;
+  margin: 0 auto;
+  height: 50%;
+  align-self: center;
+  background: white;
+  padding: 20px !important;
+  border-radius: 10px;
+}
+
+.center .ant-input-number {
+  width: -webkit-fill-available;
+}
+
+.center .ant-col.ant-form-item-label label {
+  min-width: 9em;
+}
+
+.center h1 {
+  text-align: center;
+  padding: 0 0 20px 0;
+  border-bottom: 1px solid silver;
+}
+
+.center form {
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+
+.togglesignbutton {
+  cursor: pointer;
+}
