@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import swal from "sweetalert2";
@@ -28,13 +28,19 @@ function Index() {
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const [loader, setLoader] = useState(false);
-  const [valOtp, setValOtp] = useState(false);
   const { id } = useParams();
 
-  const { signup } = useSelector((state) => ({
+  const { signup, otpTog } = useSelector((state) => ({
     signup: state.signup,
+    otpTog: state.otpTog,
   }));
-  return <>{signup ? <Login /> : <CustomerRegister />}</>;
+
+  useEffect(() => {
+    dispatch({ type: "toggleSign", payload: true });
+    dispatch({ type: "toggleOtp", payload: true });
+  }, []);
+
+  return <>{signup ? otpTog ? <Login /> : <Otp /> : <CustomerRegister />}</>;
 }
 
 export default Index;

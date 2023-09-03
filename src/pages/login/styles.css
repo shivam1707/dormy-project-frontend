@@ -25,6 +25,14 @@
   border-radius: 10px;
 }
 
+.center .ant-input-number {
+  width: -webkit-fill-available;
+}
+
+.center .ant-col.ant-form-item-label label {
+  min-width: 9em;
+}
+
 .center h1 {
   text-align: center;
   padding: 0 0 20px 0;
@@ -34,4 +42,8 @@
 .center form {
   padding: 0 40px;
   box-sizing: border-box;
+}
+
+.togglesignbutton {
+  cursor: pointer;
 }

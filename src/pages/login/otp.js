@@ -29,7 +29,7 @@ function Otp() {
   const onFinish = async (values) => {
     console.log(values, "valuesssssssss")
     setLoader(true);
-    let { data, success, error, token, message } = await Request.login({
+    let { data, success, error, token, message } = await Request.otp({
       ...values,
     });
     if (token) {
@@ -50,7 +50,7 @@ function Otp() {
   return (
     <div className='center'>
       <h5 className='p-3 text-center bg-info rounded-top bg-gradient text-white'>
-        Login
+        Validate With Otp
       </h5>
       <Form
         form={form}
@@ -64,8 +64,8 @@ function Otp() {
         <Form.Item label="Mobile Number" name="username">
           <InputNumber placeholder='mobileNo'/>
         </Form.Item>
-        <Form.Item label="Password" name="password" type="password">
-          <Input.Password placeholder="Password" />
+        <Form.Item label="Otp" name="otp">
+          <InputNumber placeholder="write otp" />
         </Form.Item>
         <Form.Item style ={{marginTop: "2em"}} className='buttonForm' wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit">
@@ -73,6 +73,8 @@ function Otp() {
           </Button>
         </Form.Item>
       </Form>
+      <h4>OR</h4>
+      <Button type="primary" onClick={() => dispatch({ type: "toggleOtp", payload: true })}>Validate Using Email</Button>
     </div>
   )
 }

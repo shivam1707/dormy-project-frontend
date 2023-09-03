@@ -20,8 +20,6 @@ import Quiz from "./components/assets/quiz.png";
 import Homepage from './pages/hompage'
 
 const MenuComponent = () => {
-
-
   return (
     <Menu
       className="MenuItem"

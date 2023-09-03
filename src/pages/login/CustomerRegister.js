@@ -93,7 +93,10 @@ function CustomerRegister() {
         </Form.Item>
       </Form>
 
-      <p onClick={() => dispatch({ type: "toggleSign", payload: true })}>
+      <p
+        className="togglesignbutton"
+        onClick={() => dispatch({ type: "toggleSign", payload: true })}
+      >
         Sign In
       </p>
     </div>

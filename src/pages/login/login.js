@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import swal from "sweetalert2";
@@ -48,10 +48,6 @@ function Login() {
     setLoader(false);
   };
 
-  const toggleOtp = () => {
-    valOtp ? setValOtp(false) : setValOtp(true);
-  };
-
   return (
     <div className="center">
       <h5 className="p-3 text-center bg-info rounded-top bg-gradient text-white">
@@ -82,11 +78,11 @@ function Login() {
           </Button>
         </Form.Item>
       </Form>
-      <p onClick={() => dispatch({ type: "toggleSign", payload: false })}>
+      <p className="togglesignbutton" onClick={() => dispatch({ type: "toggleSign", payload: false })}>
         Don't have an account! Sign Up
       </p>
       <h4>OR</h4>
-      <Button onClick={toggleOtp}>Validate Using OTP</Button>
+      <Button type="primary" onClick={() => dispatch({ type: "toggleOtp", payload: false })}>Validate Using OTP</Button>
     </div>
   );
 }
