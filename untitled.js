@@ -1,29 +1,25 @@
-var longestCommonPrefix = function (strs) {
-  var stri = strs.sort((a, b) => a.length - b.length);
+// var z = 0
+// var cur = (x) => {
+//    return function inner(y) {
+//     if (y === undefined) {
+//       return x;
+//     }
+//    x = x * y;
+//    z = x
+//    return inner
+//   }
+// };
 
-  var arr = [...stri[0]];
-  var arr1 = new Array(arr.length);
-  for (var i = 1; i < strs.length; i++) {
-    for (var j in arr) {
-      if (arr[j] == strs[i][j]) {
-        arr1[j] = strs[i][j];
-      } else {
-        arr1.fill(0, j);
-      }
-    }
-  }
-  var str = ""
-  if(arr1.length == 0){
-    return '""'
-  }
-  for (i of arr1) {
-    if (i != 0) {
-      str += i
-    }
-  }
-  console.log(str)
+// var x = cur(2)(4)(2)
+// console.log(z)
+// console.log(x());
+
+let calc = () => {
+  return {
+    sum: (x, y) => x + y,
+    sub: (x, y) => x - y,
+  };
 };
-
-var strs = [""];
-const arr = longestCommonPrefix(strs);
-console.log(arr)
+var cal = calc();
+console.log(cal.sum(3, 10));
+console.log(cal.sub(3, 10));

@@ -26,3 +26,7 @@
   width: 10vw;
   min-width: 10vw;
 }
+
+.containerContent {
+  padding: 24px !important;
+}

@@ -7,7 +7,7 @@ body {
 .center {
   width: 450px;
   margin: 0 auto;
-  height: 50%;
+  height: auto;
   align-self: center;
   background: white;
   padding: 20px !important;
