@@ -16,6 +16,7 @@ import SiderMenu from "./MenuComponent/SiderMenu";
 import NavigateBack from "./MenuComponent/navigate";
 import MasterEntry from "./AdminComponents/masterentry";
 import PartnerRegistration from "./AdminComponents/partnerregisteration";
+import Otp from "./pages/login/otp";
 
 function App() {
   const { Header, Sider, Content, Footer } = Layout;
@@ -51,6 +52,7 @@ function App() {
                   <Routes>
                     <Route path="*" element={<Navigate to="/home" />} />
                     <Route element={<Login />} path="/login" />
+                    <Route element={<Otp />} path="/otp/:number" />
                     <Route element={<Homepage />} path="/home" />
                     <Route element={<MasterEntry />} path="/masterentry" />
                     <Route element={<PartnerRegistration />} path="/partnerregistration" />

@@ -40,7 +40,7 @@ function Index() {
     dispatch({ type: "toggleOtp", payload: true });
   }, []);
 
-  return <>{signup ? otpTog ? <Login /> : <Otp /> : <CustomerRegister />}</>;
+  return <>{signup ? <Login /> : <CustomerRegister />}</>;
 }
 
 export default Index;

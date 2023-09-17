@@ -14,7 +14,7 @@
 }
 
 .loginform .ant-form-item {
-  margin-bottom: 0 !important;
+  /* margin-bottom: 0 !important; */
 }
 
 .ant-select-dropdown .rc-virtual-list-holder-inner {
@@ -57,13 +57,14 @@
 }
 
 .center {
-  width: 450px;
+  width: 38vw;
   margin: 0 auto;
   height: auto;
   align-self: center;
   background: white;
   padding: 20px !important;
   border-radius: 10px;
+  text-align: -webkit-center;
 }
 
 .center .ant-input-number {
@@ -71,7 +72,10 @@
 }
 
 .center .ant-col.ant-form-item-label label {
-  min-width: 9em;
+  min-width: 12em;
+  max-width: 12em;
+  height: 3em !important;
+  text-wrap: wrap;
 }
 
 .center h1 {
