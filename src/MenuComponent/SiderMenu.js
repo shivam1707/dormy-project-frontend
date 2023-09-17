@@ -114,7 +114,7 @@ const SiderMenu = () => {
   return (
     <Menu
       className="MenuItem"
-      theme="dark"
+      // theme="dark"
       inlineCollapsed={false}
       mode="inline"
       defaultSelectedKeys={["1"]}

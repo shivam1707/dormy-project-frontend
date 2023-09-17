@@ -1,6 +1,47 @@
 .loginform input {
-  height: 40px;
+  height: 40px !important;
   padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+.loginform .ant-select-selection-placeholder {
+  align-self: center !important;
+  padding-left: 10px;
+}
+
+.loginform .ant-select-selection-item {
+  align-self: center !important;
+}
+
+.loginform .ant-form-item {
+  margin-bottom: 0 !important;
+}
+
+.ant-select-dropdown .rc-virtual-list-holder-inner {
+  padding: 10px !important;
+  row-gap: 10px;
+}
+
+.ant-select-dropdown .ant-select-item-option-content {
+  padding: 10px !important;
+}
+
+.loginform .ant-select-selector {
+  height: 40px !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+  text-align: left;
+}
+
+.loginform .ant-input-number {
+  width: -webkit-fill-available;
+}
+
+.loginform .ant-picker {
+  width: -webkit-fill-available;
+}
+.loginform span span.anticon {
+  padding-right: 10px !important;
 }
 
 .loginform label {

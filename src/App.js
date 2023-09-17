@@ -15,6 +15,7 @@ import HeaderMenu from "./MenuComponent/TopMenu";
 import SiderMenu from "./MenuComponent/SiderMenu";
 import NavigateBack from "./MenuComponent/navigate";
 import MasterEntry from "./AdminComponents/masterentry";
+import PartnerRegistration from "./AdminComponents/partnerregisteration";
 
 function App() {
   const { Header, Sider, Content, Footer } = Layout;
@@ -52,6 +53,7 @@ function App() {
                     <Route element={<Login />} path="/login" />
                     <Route element={<Homepage />} path="/home" />
                     <Route element={<MasterEntry />} path="/masterentry" />
+                    <Route element={<PartnerRegistration />} path="/partnerregistration" />
                   </Routes>
                 </Content>
               </Layout>
