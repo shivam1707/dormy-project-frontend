@@ -52,19 +52,16 @@ function CustomerRegister() {
   };
 
   const onFinish = async (values) => {
-    console.log(values, "valuesssssssss");
     setLoader(true);
     let { data, success, error, token, message } = await Request.register({
       ...values,
+      role: "ADMIN",
     });
     if (success) {
       notification.success({
         message: message || "Registeration Successfull",
       });
-      navigate(`/your-next-route/${data.number}`);
-      // setTimeout(() => {
-      //   navigate(`/report/${data._id}`);
-      // }, 0);
+      navigate(`/otp/${data.mobileNo}`);
     } else {
       notification.error({
         message: message || "Some Error Occured",
@@ -105,11 +102,11 @@ function CustomerRegister() {
               required: true,
               type: "number",
               validator: (_, value) => {
-                if (!value || String(value).length === 10) {
+                if (!value || String(value).length === 13) {
                   return Promise.resolve();
                 }
                 return Promise.reject(
-                  new Error("Mobile number must be 10 digits")
+                  new Error("Mobile number must be 13 digits")
                 );
               },
             },
@@ -117,7 +114,7 @@ function CustomerRegister() {
           label="Mobile Number"
           name="mobileNo"
         >
-          <InputNumber placeholder="Please type mobile no." />
+          <Input placeholder="Please type mobile no." />
         </Form.Item>
         <Form.Item
           rules={[
@@ -127,17 +124,17 @@ function CustomerRegister() {
             },
           ]}
           label="First Name"
-          name="firstname"
+          name="firstName"
         >
           <Input placeholder="first name" />
         </Form.Item>
         <Form.Item label="Last Name" name="lastName">
           <Input placeholder="last name" />
         </Form.Item>
-        <Form.Item
+        {/* <Form.Item
           rules={[
             {
-              required: true,
+              // required: true,
               type: "email",
               // message: "Please input your email!",
             },
@@ -146,7 +143,7 @@ function CustomerRegister() {
           name="email"
         >
           <Input placeholder="type email" />
-        </Form.Item>
+        </Form.Item> */}
         {/* <Form.Item label="Role" name="role">
           <Input placeholder="type role"/>
         </Form.Item>
@@ -175,7 +172,7 @@ function CustomerRegister() {
         </Form.Item>
 
         <Form.Item
-          name="confirm"
+          name="rePassword"
           label="Confirm Password"
           hasFeedback
           rules={[

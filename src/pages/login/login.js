@@ -36,7 +36,7 @@ function Login() {
     });
     if (token) {
       notification.success({
-        message: token || "Report Added Successfully",
+        message: token || "Login Successful",
       });
       // setTimeout(() => {
       //   navigate(`/report/${data._id}`);
@@ -69,12 +69,12 @@ function Login() {
               required: true,
               type: "number",
               validator: (_, value) => {
-                if (!value || String(value).length === 10) {
+                if (!value || String(value).length === 13) {
                   setMobileno(value);
                   return Promise.resolve();
                 }
                 return Promise.reject(
-                  new Error("Mobile number must be 10 digits")
+                  new Error("Mobile number must be 13 digits")
                 );
               },
             },

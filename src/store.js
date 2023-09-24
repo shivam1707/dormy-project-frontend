@@ -5,6 +5,7 @@ const initialState = {
   signup: true,
   otpTog: true,
   overview: true,
+  setToken: null,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -29,6 +30,9 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         overview: action.payload,
       };
+    case "setToken":
+      localStorage.setItem("token", action.payload);
+      return {};
     default:
       return state;
   }

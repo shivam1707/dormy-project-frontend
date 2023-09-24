@@ -42,7 +42,35 @@ class Request {
   register(values) {
     return new Promise((next, error) => {
       authAxios
-        .post("/register/token", { ...values })
+        .post("/login/register", { ...values })
+        .then((d) => {
+          next(d.data);
+        })
+        .catch((err) => {
+          next(err.response.data);
+          this.error(err);
+        });
+    });
+  }
+
+  getotp(values) {
+    return new Promise((next, error) => {
+      authAxios
+        .post("/login/generateOTP", { ...values })
+        .then((d) => {
+          next(d.data);
+        })
+        .catch((err) => {
+          next(err.response.data);
+          this.error(err);
+        });
+    });
+  }
+
+  validateOTP(values) {
+    return new Promise((next, error) => {
+      authAxios
+        .post("/login/validateOTP", { ...values })
         .then((d) => {
           next(d.data);
         })

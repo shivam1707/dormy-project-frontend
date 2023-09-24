@@ -27,19 +27,37 @@ function Otp() {
   const { id } = useParams();
 
   const { number } = useParams();
-  const onFinish = async (values) => {
-    console.log(values, "valuesssssssss");
+
+  const getOtp = async (otp) => {
     setLoader(true);
-    let { data, success, error, token, message } = await Request.otp({
+    let { data, success, error, message } = await Request.getotp({
+      mobileNo: otp,
+    });
+    if (success) {
+      notification.success({
+        message: message || "OTP sent successfully",
+      });
+    } else {
+      notification.error({
+        message: message || "Some Error Occured",
+      });
+    }
+    setLoader(false);
+  };
+
+  const onFinish = async (values) => {
+    setLoader(true);
+    let { data, success, error, token, message } = await Request.validateOTP({
       ...values,
     });
-    if (token) {
+    if (success) {
       notification.success({
-        message: token || "Report Added Successfully",
+        message: success || "OTP Verified",
       });
-      // setTimeout(() => {
-      //   navigate(`/report/${data._id}`);
-      // }, 0);
+      dispatch({ type: "setToken", payload: "7239847823bccdh1nhcdhm193" });
+      setTimeout(() => {
+        navigate(`/home`);
+      }, 0);
     } else {
       notification.error({
         message: message || "Some Error Occured",
@@ -50,9 +68,13 @@ function Otp() {
 
   useEffect(() => {
     form.setFieldsValue({
-      mobileno: number,
+      mobileNo: number,
     });
   }, [number, form]);
+
+  useEffect(() => {
+    getOtp(number);
+  }, [number]);
 
   return (
     <div className="center">
@@ -68,8 +90,8 @@ function Otp() {
         onFinish={onFinish}
         autoComplete="off"
       >
-        <Form.Item label="Mobile Number" name="mobileno">
-          <InputNumber placeholder="mobileNo" />
+        <Form.Item label="Mobile Number" name="mobileNo">
+          <Input placeholder="mobileNo" />
         </Form.Item>
         <Form.Item label="Otp" name="otp">
           <InputNumber placeholder="write otp" />
