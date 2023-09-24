@@ -1,36 +1,36 @@
 import React from "react";
 import { Menu } from "antd";
-import { Link } from "react-router-dom";
-import "./styles.css"
+import { Link, useLocation } from "react-router-dom";
+import "./styles.css";
 import Dashboard from "../components/assets/dashboard.png";
 import Assessment from "../components/assets/note_alt.png";
 
 const menuItems = [
   {
-    key: "1",
+    key: "11",
     icon: <img src={Dashboard} className="imgMenu" alt="master entry" />,
     text: "Master Entry",
     link: "/masterentry",
   },
   {
-    key: "2",
+    key: "12",
     icon: <img src={Dashboard} className="imgMenu" alt="Parter Registration" />,
     text: "Parter Registration",
     link: "/partnerregistration",
   },
   {
-    key: "3",
+    key: "13",
     icon: <img src={Dashboard} className="imgMenu" alt="Parter Approval" />,
     text: "Parter Approval",
     link: "/partnerapproval",
   },
   {
-    key: "4",
+    key: "14",
     icon: <img src={Assessment} className="imgMenu" alt="Partner Management" />,
     text: "Partner Management",
     children: [
       {
-        key: "5",
+        key: "15",
         icon: (
           <img
             src={Assessment}
@@ -42,7 +42,7 @@ const menuItems = [
         link: "/propertyConfig",
       },
       {
-        key: "6",
+        key: "16",
         icon: (
           <img
             src={Assessment}
@@ -54,7 +54,7 @@ const menuItems = [
         link: "/layoutConfig",
       },
       {
-        key: "7",
+        key: "17",
         icon: (
           <img
             src={Assessment}
@@ -66,7 +66,7 @@ const menuItems = [
         link: "/businessConfig",
       },
       {
-        key: "8",
+        key: "18",
         icon: (
           <img src={Assessment} className="imgMenu" alt="General Pricing" />
         ),
@@ -76,19 +76,19 @@ const menuItems = [
     ],
   },
   {
-    key: "9",
+    key: "19",
     icon: <img src={Dashboard} className="imgMenu" alt="Partner Statistic" />,
     text: "Partner Statistic",
     link: "/partnerstatistics",
   },
   {
-    key: "10",
+    key: "20",
     icon: <img src={Dashboard} className="imgMenu" alt="Dom Statistic" />,
     text: "Dom Statistic",
     link: "/domstatistics",
   },
   {
-    key: "11",
+    key: "21",
     icon: (
       <img src={Dashboard} className="imgMenu" alt="Partnership agreement" />
     ),
@@ -96,13 +96,13 @@ const menuItems = [
     link: "/partneragreement",
   },
   {
-    key: "12",
+    key: "22",
     icon: <img src={Dashboard} className="imgMenu" alt="Settings" />,
     text: "Settings",
     link: "/settings",
   },
   {
-    key: "13",
+    key: "23",
     icon: <img src={Dashboard} className="imgMenu" alt="DOM logs/correction" />,
     text: "DOM logs/correction",
     link: "/domlogs",
@@ -111,14 +111,17 @@ const menuItems = [
 ];
 
 const SiderMenu = () => {
+  const location = useLocation();
   return (
     <Menu
       className="MenuItem"
-      // theme="dark"
+      selectedKeys={[
+        menuItems.find((item) => location.pathname === item.link)?.key || "11",
+      ]}
       inlineCollapsed={false}
       mode="inline"
-      defaultSelectedKeys={["1"]}
-      defaultOpenKeys={["sub1"]}
+      defaultSelectedKeys={["11"]}
+      defaultOpenKeys={["11"]}
       style={{
         height: "100%",
         borderRight: 0,

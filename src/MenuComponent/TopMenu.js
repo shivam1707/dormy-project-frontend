@@ -1,6 +1,6 @@
 import React from "react";
 import { Menu } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Dashboard from "../components/assets/dashboard.png";
 import Assessment from "../components/assets/note_alt.png";
 
@@ -21,8 +21,12 @@ const menuItems = [
 ];
 
 const HeaderMenu = () => {
+  const location = useLocation();
   return (
     <Menu
+      selectedKeys={[
+        menuItems.find((item) => location.pathname === item.link)?.key || "1",
+      ]}
       className="MenuItem"
       theme="dark"
       inlineCollapsed={false}

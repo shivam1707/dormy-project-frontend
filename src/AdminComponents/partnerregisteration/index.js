@@ -66,19 +66,46 @@ const PartnerRegistration = () => {
 
     return uploadedFiles;
   };
+
   const onFinish = async () => {
     form.validateFields().then(async (values) => {
       setLoader(true);
-      let { data, success, error, token, message } = await Request.register({
-        ...values,
-      });
-      if (token) {
+      const formData = new FormData();
+      formData.append(
+        "property",
+        JSON.stringify({
+          propertyNo: 1116712,
+          propertyName: "A 85",
+          address1: "Ashok Nagar",
+          address2: "Delhi",
+          city: "Delhi",
+          state: "Delhi",
+          pinCode: 12345756,
+          approvalstatus: "UNDER_REVIEW",
+          managerName: "Shivam",
+          managerMobNo: 1234453656,
+          customerCareNo: 123456,
+          country: "INDIA",
+          dateRegistered: "2023-01-01",
+          ownerName: "Ashok",
+          googleMapLink: "WWW",
+        })
+      );
+      console.log(formData);
+      for (const [key, value] of formData.entries()) {
+        console.log(`Key: ${key}, Value: ${value}`);
+      }
+      console.log(fileList);
+      formData.append("images", fileList);
+
+      formData.append("icon", fileList1);
+      let { data, success, error, message } = await Request.propertyRegister(
+        formData
+      );
+      if (success) {
         notification.success({
-          message: token || "Report Added Successfully",
+          message: message || "Report Added Successfully",
         });
-        // setTimeout(() => {
-        //   navigate(`/report/${data._id}`);
-        // }, 0);
       } else {
         notification.error({
           message: message || "Some Error Occured",
@@ -102,26 +129,29 @@ const PartnerRegistration = () => {
           onFinish={onFinish}
           autoComplete="off"
         >
-          <Form.Item label="" name="propertyname">
+          <Form.Item label="" name="propertyNo">
+            <InputNumber placeholder="Property Number" />
+          </Form.Item>
+          <Form.Item label="" name="propertyName">
             <Input placeholder="Property Name" />
           </Form.Item>
-          <Form.Item label="" name="dateofregis">
+          <Form.Item label="" name="dateRegistered">
             <DatePicker placeholder="Date Of Registeration" />
           </Form.Item>
-          <Form.Item label="" name="add1">
+          <Form.Item label="" name="address1">
             <Input placeholder="Detail Address Line 1" />
           </Form.Item>
-          <Form.Item label="" name="add2">
+          <Form.Item label="" name="address2">
             <Input placeholder="Detail Address Line 1" />
           </Form.Item>
-          <Form.Item label="" name="cityname">
+          <Form.Item label="" name="city">
             <Select placeholder="City Name">
               <Option value="city1">city1</Option>
               <Option value="city2">city2</Option>
               <Option value="city3">city3</Option>
             </Select>
           </Form.Item>
-          <Form.Item label="" name="pincode">
+          <Form.Item label="" name="pinCode">
             <Select placeholder="Enter Pincode">
               <Option value="city1">213124</Option>
               <Option value="city2">423413</Option>
@@ -137,32 +167,32 @@ const PartnerRegistration = () => {
           <Form.Item label="" name="approvalstatus">
             <Input placeholder="Approval Status" />
           </Form.Item>
-          <Form.Item label="" name="propertynumber">
+          <Form.Item label="" name="propertyNo">
             <InputNumber placeholder="Property Number" />
           </Form.Item>
-          <Form.Item label="" name="managername">
+          <Form.Item label="" name="managerName">
             <Input placeholder="Manager Name" />
           </Form.Item>
-          <Form.Item label="" name="managermobno">
+          <Form.Item label="" name="managerMobNo">
             <InputNumber placeholder="Manager Mobile Number" />
           </Form.Item>
-          <Form.Item label="" name="ownername">
+          <Form.Item label="" name="ownerName">
             <Input placeholder="Owner Name" />
           </Form.Item>
-          <Form.Item label="" name="ownermobno">
+          <Form.Item label="" name="customerCareNo">
             <InputNumber placeholder="Owner Mobile Number" />
           </Form.Item>
-          <Form.Item label="" name="gmaplink">
+          <Form.Item label="" name="googleMapLink">
             <Input placeholder="Gmap Link(Manual copy)" />
           </Form.Item>
-          <Form.Item label="" name="email">
+          {/* <Form.Item label="" name="email">
             <Radio.Group defaultValue="a">
               <Radio.Button value="a">Instagram</Radio.Button>
               <Radio.Button value="b">Facebook</Radio.Button>
               <Radio.Button value="c">twitter</Radio.Button>
               <Radio.Button value="d">Map</Radio.Button>
             </Radio.Group>
-          </Form.Item>
+          </Form.Item> */}
           <Form.Item
             name="upload"
             label=""

@@ -81,6 +81,20 @@ class Request {
     });
   }
 
+  propertyRegister(values) {
+    return new Promise((next, error) => {
+      authAxios
+        .post("/property/register", values)
+        .then((d) => {
+          next(d.data);
+        })
+        .catch((err) => {
+          next(err.response.data);
+          this.error(err);
+        });
+    });
+  }
+
   fetchReport(id) {
     return new Promise((next, error) => {
       authAxios
