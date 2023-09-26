@@ -25,6 +25,7 @@ function Login() {
   const [form] = Form.useForm();
   const [loader, setLoader] = useState(false);
   const [valOtp, setValOtp] = useState(false);
+  const [number, setMobileno] = useState(false);
   const { id } = useParams();
 
   const onFinish = async (values) => {
@@ -35,7 +36,7 @@ function Login() {
     });
     if (token) {
       notification.success({
-        message: token || "Report Added Successfully",
+        message: token || "Login Successful",
       });
       // setTimeout(() => {
       //   navigate(`/report/${data._id}`);
@@ -62,8 +63,26 @@ function Login() {
         onFinish={onFinish}
         autoComplete="off"
       >
-        <Form.Item label="Username" name="username">
-          <Input />
+        <Form.Item
+          rules={[
+            {
+              required: true,
+              type: "number",
+              validator: (_, value) => {
+                if (!value || String(value).length === 13) {
+                  setMobileno(value);
+                  return Promise.resolve();
+                }
+                return Promise.reject(
+                  new Error("Mobile number must be 13 digits")
+                );
+              },
+            },
+          ]}
+          label="Mobile Number"
+          name="mobileNo"
+        >
+          <Input placeholder="Please type mobile no." />
         </Form.Item>
         <Form.Item label="Password" name="password" type="password">
           <Input.Password placeholder="Password" />
@@ -78,11 +97,23 @@ function Login() {
           </Button>
         </Form.Item>
       </Form>
-      <p className="togglesignbutton" onClick={() => dispatch({ type: "toggleSign", payload: false })}>
+      <p
+        className="togglesignbutton"
+        onClick={() => dispatch({ type: "toggleSign", payload: false })}
+      >
         Don't have an account! Sign Up
       </p>
       <h4>OR</h4>
-      <Button type="primary" onClick={() => dispatch({ type: "toggleOtp", payload: false })}>Validate Using OTP</Button>
+      <Button
+        type="primary"
+        onClick={() =>
+          number
+            ? navigate(`/otp/${number}`)
+            : notification.error({ message: "Please type number" })
+        }
+      >
+        Validate Using OTP
+      </Button>
     </div>
   );
 }

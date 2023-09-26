@@ -1,0 +1,8 @@
+.loginform.formHeader {
+  grid-template-columns: 1fr 1fr;
+  margin-top: 2em;
+  width: 65vw;
+  display: grid;
+  column-gap: 15em;
+  margin: 0 auto;
+}
