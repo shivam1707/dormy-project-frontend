@@ -32,65 +32,109 @@ const PartnerRegistration = () => {
   const [fileList, setFileList] = useState([]);
   const [fileList1, setFileList1] = useState([]);
   const { id } = useParams();
+  const [formFileData, setData] = useState({});
 
   const { Option } = Select;
 
-  const normFile = (e) => {
-    console.log("Upload event:", e);
-    if (Array.isArray(e)) {
-      return e;
-    }
-    const uploadedFiles = e && e.fileList;
+  // const normFile = (e) => {
+  //   console.log("Upload event:", e);
+  //   if (Array.isArray(e)) {
+  //     return e;
+  //   }
+  //   const uploadedFiles = e && e.fileList;
 
-    if (uploadedFiles.length > 5) {
-      // Display an error notification if more than 3 files are uploaded
-      message.error("You can only upload up to 5 files.");
-      return uploadedFiles.slice(0, 5); // Limit to the first 3 files
-    }
+  //   if (uploadedFiles.length > 5) {
+  //     // Display an error notification if more than 3 files are uploaded
+  //     message.error("You can only upload up to 5 files.");
+  //     return uploadedFiles.slice(0, 5); // Limit to the first 3 files
+  //   }
 
-    return uploadedFiles;
+  //   return uploadedFiles;
+  // };
+
+  const dummyRequest = ({ file, onSuccess }) => {
+    setTimeout(() => {
+      onSuccess("ok");
+    }, 0);
+  };
+  const onChangeFile = (info, key) => {
+    const nextState = {};
+    switch (info.file.status) {
+      case "uploading":
+        nextState.selectedFile = info.file;
+        nextState.id = [info.file];
+        setData((prev) => ({ ...prev, [key]: info.file }));
+        break;
+      case "done":
+        nextState.selectedFile = info.file;
+        nextState.id = [info.file];
+        setData((prev) => ({ ...prev, [key]: info.file }));
+        break;
+
+      default:
+        // error or removed
+        nextState.selectedFile = null;
+        nextState.id = [];
+        setData((prev) => ({ ...prev, [key]: null }));
+    }
+  };
+  const beforeUpload = (file) => {
+    const isLt2M = file.size / 1024 / 1024 < 30000;
+    // console.log(isLt2M, file.size,)
+    if (!isLt2M) {
+      notification.warning({
+        message: `File must smaller than ${30000}MB!`,
+      });
+      return false;
+    }
+    return true;
   };
 
-  const normFile1 = (e) => {
-    console.log("Upload event1:", e);
+  // const normFile1 = (e) => {
+  //   console.log("Upload event1:", e);
+  //   if (Array.isArray(e)) {
+  //     return e;
+  //   }
+  //   const uploadedFiles = e && e.fileList1;
+
+  //   if (uploadedFiles.length > 3) {
+  //     // Display an error notification if more than 3 files are uploaded
+  //     message.error("You can only upload up to 3 files.");
+  //     return uploadedFiles.slice(0, 3); // Limit to the first 3 files
+  //   }
+
+  //   return uploadedFiles;
+  // };
+
+  const normFile = (e) => {
+    // console.log('Upload event:', e);
     if (Array.isArray(e)) {
       return e;
     }
-    const uploadedFiles = e && e.fileList1;
-
-    if (uploadedFiles.length > 3) {
-      // Display an error notification if more than 3 files are uploaded
-      message.error("You can only upload up to 3 files.");
-      return uploadedFiles.slice(0, 3); // Limit to the first 3 files
-    }
-
-    return uploadedFiles;
+    return e && e.fileList;
   };
 
   const onFinish = async () => {
     form.validateFields().then(async (values) => {
       setLoader(true);
       const formData = new FormData();
-      formData.append(
-        "property",
-        JSON.stringify({
-          propertyNo: 1116712,
-          propertyName: "A 85",
-          address1: "Ashok Nagar",
-          address2: "Delhi",
-          city: "Delhi",
-          state: "Delhi",
-          pinCode: 12345756,
-          approvalstatus: "UNDER_REVIEW",
-          managerName: "Shivam",
-          managerMobNo: 1234453656,
-          customerCareNo: 123456,
-          country: "INDIA",
-          dateRegistered: "2023-01-01",
-          ownerName: "Ashok",
-          googleMapLink: "WWW",
-        })
-      );
+      formData.append("property", {
+        propertyNo: 1816712,
+        propertyName: "A 85",
+        address1: "Ashok Nagar",
+        address2: "Delhi",
+        city: "Delhi",
+        state: "Delhi",
+        pinCode: 12345756,
+        approvalstatus: "UNDER_REVIEW",
+        managerName: "Shivam",
+        managerMobNo: 1234453656,
+        customerCareNo: 123456,
+        country: "INDIA",
+        dateRegistered: "2023-01-01",
+        ownerName: "Ashok",
+        googleMapLink: "WWW",
+      });
       console.log(formData);
       for (const [key, value] of formData.entries()) {
         console.log(`Key: ${key}, Value: ${value}`);
@@ -194,49 +238,41 @@ const PartnerRegistration = () => {
             </Radio.Group>
           </Form.Item> */}
           <Form.Item
-            name="upload"
-            label=""
+            name="propertypictures"
+            // label="Standard ID"
             valuePropName="fileList"
-            maxCount={5}
-            multiple
             getValueFromEvent={normFile}
+            extra=""
           >
             <Upload
-              name="propertypictures"
-              beforeUpload={(file) => {
-                message.info(`${file.name} has been added to the upload list.`);
-                setFileList([...fileList, file]);
-                return false;
-              }}
-              onRemove={(file) => {
-                const newFileList = fileList.filter((item) => item !== file);
-                setFileList(newFileList);
-              }}
+              name="logo"
+              onChange={(p) => onChangeFile(p, "doc_1")}
+              fileList={[formFileData?.doc_1]}
+              maxCount={2}
+              beforeUpload={beforeUpload}
+              customRequest={dummyRequest}
+              // accept={ImageFileFormat}
             >
-              <Button icon={<UploadOutlined />}>Property Pictures</Button>
+              <Button icon={<UploadOutlined />}>Click to upload</Button>
             </Upload>
           </Form.Item>
           <Form.Item
             name="propertyicons"
-            label=""
-            maxCount={3}
-            multiple
-            valuePropName="fileList1"
-            getValueFromEvent={normFile1}
+            // label="Standard ID"
+            valuePropName="fileList"
+            getValueFromEvent={normFile}
+            extra=""
           >
             <Upload
               name="logo"
-              beforeUpload={(file) => {
-                message.info(`${file.name} has been added to the upload list.`);
-                setFileList1([...fileList1, file]); // Add the selected file to the state
-                return false;
-              }}
-              onRemove={(file) => {
-                const newFileList1 = fileList1.filter((item) => item !== file);
-                setFileList1(newFileList1);
-              }}
+              onChange={(p) => onChangeFile(p, "doc_1")}
+              fileList={[formFileData?.doc_1]}
+              maxCount={1}
+              beforeUpload={beforeUpload}
+              customRequest={dummyRequest}
+              // accept={ImageFileFormat}
             >
-              <Button icon={<UploadOutlined />}>Property Icons</Button>
+              <Button icon={<UploadOutlined />}>Click to upload</Button>
             </Upload>
           </Form.Item>
         </Form>
