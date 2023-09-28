@@ -84,7 +84,7 @@ class Request {
   propertyRegister(values) {
     return new Promise((next, error) => {
       authAxios
-        .post("/property/register", values)
+        .post("/property/registerWithout", values)
         .then((d) => {
           next(d.data);
         })

@@ -105,7 +105,6 @@ const PartnerRegistration = () => {
 
   //   return uploadedFiles;
   // };
-
   const normFile = (e) => {
     // console.log('Upload event:', e);
     if (Array.isArray(e)) {
@@ -118,31 +117,17 @@ const PartnerRegistration = () => {
     form.validateFields().then(async (values) => {
       setLoader(true);
       const formData = new FormData();
-      formData.append("property", {
-        propertyNo: 1816712,
-        propertyName: "A 85",
-        address1: "Ashok Nagar",
-        address2: "Delhi",
-        city: "Delhi",
-        state: "Delhi",
-        pinCode: 12345756,
-        approvalstatus: "UNDER_REVIEW",
-        managerName: "Shivam",
-        managerMobNo: 1234453656,
-        customerCareNo: 123456,
-        country: "INDIA",
-        dateRegistered: "2023-01-01",
-        ownerName: "Ashok",
-        googleMapLink: "WWW",
-      });
+      formData.append("property", JSON.stringify({
+        ...values
+      }));
       console.log(formData);
       for (const [key, value] of formData.entries()) {
         console.log(`Key: ${key}, Value: ${value}`);
       }
       console.log(fileList);
-      formData.append("images", fileList);
+      // formData.append("images", JSON.stringify([]));
 
-      formData.append("icon", fileList1);
+      // formData.append("icon", fileList1);
       let { data, success, error, message } = await Request.propertyRegister(
         formData
       );
@@ -197,9 +182,9 @@ const PartnerRegistration = () => {
           </Form.Item>
           <Form.Item label="" name="pinCode">
             <Select placeholder="Enter Pincode">
-              <Option value="city1">213124</Option>
-              <Option value="city2">423413</Option>
-              <Option value="city3">123124</Option>
+              <Option value="213124">213124</Option>
+              <Option value="423413">423413</Option>
+              <Option value="123124">123124</Option>
             </Select>
           </Form.Item>
           <Form.Item label="" name="country">
@@ -209,7 +194,7 @@ const PartnerRegistration = () => {
             <Input placeholder="State" />
           </Form.Item>
           <Form.Item label="" name="approvalstatus">
-            <Input placeholder="Approval Status" />
+            <Input value={"UNDER_REVIEW"} disabled={true} placeholder="Approval Status" />
           </Form.Item>
           <Form.Item label="" name="propertyNo">
             <InputNumber placeholder="Property Number" />
@@ -251,7 +236,7 @@ const PartnerRegistration = () => {
               maxCount={2}
               beforeUpload={beforeUpload}
               customRequest={dummyRequest}
-              // accept={ImageFileFormat}
+            // accept={ImageFileFormat}
             >
               <Button icon={<UploadOutlined />}>Click to upload</Button>
             </Upload>
@@ -270,7 +255,7 @@ const PartnerRegistration = () => {
               maxCount={1}
               beforeUpload={beforeUpload}
               customRequest={dummyRequest}
-              // accept={ImageFileFormat}
+            // accept={ImageFileFormat}
             >
               <Button icon={<UploadOutlined />}>Click to upload</Button>
             </Upload>
