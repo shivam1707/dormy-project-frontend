@@ -161,6 +161,7 @@ const PartnerRegistration = () => {
         notification.success({
           message: message || "Report Added Successfully",
         });
+        navigate(`/partnerapproval`);
       } else {
         notification.error({
           message: message || "Some Error Occured",
@@ -180,7 +181,7 @@ const PartnerRegistration = () => {
           form={form}
           name="basic"
           className="loginform formHeader"
-          initialValues={{ remember: true }}
+          initialValues={{ approvalstatus: "UNDER_REVIEW", remember: true }}
           onFinish={onFinish}
           autoComplete="off"
         >
@@ -221,9 +222,9 @@ const PartnerRegistration = () => {
           </Form.Item>
           <Form.Item label="" name="approvalstatus">
             <Input
-              value={"UNDER_REVIEW"}
+              value="UNDER_REVIEW"
               disabled={true}
-              placeholder="Approval Status"
+              placeholder="UNDER_REVIEW"
             />
           </Form.Item>
           <Form.Item label="" name="propertyNo">

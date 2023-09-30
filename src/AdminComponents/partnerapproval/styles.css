@@ -14,3 +14,6 @@
   height: -webkit-fill-available;
   padding: 0 10px !important;
 }
+.partnerapprHead .ant-select {
+  width: -webkit-fill-available;
+}

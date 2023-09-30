@@ -11,6 +11,7 @@ import {
   Button,
   Input,
   Tag,
+  notification,
 } from "antd";
 import { useSelector } from "react-redux";
 import "./styles.css";
@@ -20,7 +21,6 @@ import _ from "lodash";
 import async, { auto } from "async";
 import { DateFormat } from "../../settings";
 
-const { Search } = Input;
 const { RangePicker } = DatePicker;
 
 const PartnerApproval = (props) => {
@@ -32,29 +32,34 @@ const PartnerApproval = (props) => {
   const [showModal, setShowModal] = useState(false);
   const [media, setmedia] = useState("");
 
+  const { Option } = Select;
+
   const apiFunction = async () => {
     setLoader(true);
     let { user, token, success, message, data } =
       await Request.getPartnerApproval();
     setLoader(false);
-    console.log(data, "iagit the dataaaaaaaaaa");
-    let newData = [];
     if (success && data.length) {
-      async.forEach(
-        data,
-        (val, cb) => {
-          let obj = {
-            ...val,
-          };
-          newData.push(obj);
-          cb();
-        },
-        () => {
-          setDataSource(newData);
-        }
-      );
+      setDataSource(data);
     } else {
       setDataSource([]);
+    }
+  };
+
+  const handleChange = async (value, propertyId) => {
+    setLoader(true);
+    let { user, token, success, message, data } =
+      await Request.setPartnerApproval({ id: propertyId, status: value });
+    setLoader(false);
+    if (success) {
+      apiFunction();
+      notification.success({
+        message: message,
+      });
+    } else {
+      notification.error({
+        message: message,
+      });
     }
   };
 
@@ -62,15 +67,13 @@ const PartnerApproval = (props) => {
     apiFunction();
   }, []);
 
-  const onSearch = (value) => console.log(value);
+  const statusCodes = ["UNDER_REVIEW", "ACTIVE", "INACTIVE", "HOLD"];
 
   const columns = [
     {
       title: "Pid",
       dataIndex: "propertyNo",
       key: "propertyNo",
-      fixed: "left",
-      search: true,
     },
     {
       title: "Property Name",
@@ -96,6 +99,20 @@ const PartnerApproval = (props) => {
       title: "Status",
       dataIndex: "approvalstatus",
       key: "approvalstatus",
+      width: 200,
+      render: (val, r) => {
+        return (
+          <Select
+            defaultValue={val}
+            onChange={(e) => handleChange(e, r.propertyId)}
+            placeholder="Enter Pincode"
+          >
+            {statusCodes.map((value) => {
+              return <Option value={value}>{value}</Option>;
+            })}
+          </Select>
+        );
+      },
     },
     // {
     //   title: 'Active',
@@ -196,7 +213,7 @@ const PartnerApproval = (props) => {
           dataSource={dataSource}
           columns={columns}
           loading={loader}
-          scroll={{ x: "max-content" }}
+          // scroll={{ x: "max-content" }}
         />
       </div>
     </div>

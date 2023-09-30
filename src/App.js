@@ -22,17 +22,6 @@ import PartnerApproval from "./AdminComponents/partnerapproval";
 function App() {
   const { Header, Sider, Content, Footer } = Layout;
   const [collapsed, setCollapsed] = useState(true);
-  const [collapsedwidth, setCollapsedWidth] = useState(
-    window.innerWidth >= 768 ? 140 : 0
-  );
-
-  const openCollapsed = () => {
-    setCollapsed(false);
-  };
-
-  const closeCollapsed = () => {
-    setCollapsed(true);
-  };
 
   return (
     <Router>
