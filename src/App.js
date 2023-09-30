@@ -17,6 +17,7 @@ import NavigateBack from "./MenuComponent/navigate";
 import MasterEntry from "./AdminComponents/masterentry";
 import PartnerRegistration from "./AdminComponents/partnerregisteration";
 import Otp from "./pages/login/otp";
+import PartnerApproval from "./AdminComponents/partnerapproval";
 
 function App() {
   const { Header, Sider, Content, Footer } = Layout;
@@ -56,6 +57,7 @@ function App() {
                     <Route element={<Homepage />} path="/home" />
                     <Route element={<MasterEntry />} path="/masterentry" />
                     <Route element={<PartnerRegistration />} path="/partnerregistration" />
+                    <Route element={<PartnerApproval />} path="/partnerapproval" />
                   </Routes>
                 </Content>
               </Layout>

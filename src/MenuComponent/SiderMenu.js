@@ -28,7 +28,7 @@ const menuItems = [
     key: "14",
     icon: <img src={Assessment} className="imgMenu" alt="Partner Management" />,
     text: "Partner Management",
-    children: [
+    innerChild: [
       {
         key: "15",
         icon: (
@@ -129,10 +129,10 @@ const SiderMenu = () => {
     >
       <p className="mainpageHeading">Main Page</p>
       {menuItems.map((item) => {
-        if (item.children) {
+        if (item.innerChild) {
           return (
             <Menu.SubMenu key={item.key} icon={item.icon} title={item.text}>
-              {item.children.map((child) => (
+              {item.innerChild.map((child) => (
                 <Menu.Item key={child.key}>
                   <Link to={child.link}>{child.text}</Link>
                 </Menu.Item>

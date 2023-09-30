@@ -95,6 +95,20 @@ class Request {
     });
   }
 
+  getPartnerApproval() {
+    return new Promise((next, error) => {
+      authAxios
+        .get("/property")
+        .then((d) => {
+          next(d.data);
+        })
+        .catch((err) => {
+          next(err.response.data);
+          this.error(err);
+        });
+    });
+  }
+
   fetchReport(id) {
     return new Promise((next, error) => {
       authAxios

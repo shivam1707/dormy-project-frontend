@@ -63,21 +63,44 @@ const PartnerRegistration = () => {
       case "uploading":
         nextState.selectedFile = info.file;
         nextState.id = [info.file];
-        setData((prev) => ({ ...prev, [key]: info.file }));
+        setFileList((prev) => ({ ...prev, [key]: info.file }));
         break;
       case "done":
         nextState.selectedFile = info.file;
         nextState.id = [info.file];
-        setData((prev) => ({ ...prev, [key]: info.file }));
+        setFileList((prev) => ({ ...prev, [key]: info.file }));
         break;
 
       default:
         // error or removed
         nextState.selectedFile = null;
         nextState.id = [];
-        setData((prev) => ({ ...prev, [key]: null }));
+        setFileList((prev) => ({ ...prev, [key]: null }));
     }
   };
+
+  const onChangeFile1 = (info, key) => {
+    const nextState = {};
+    switch (info.file.status) {
+      case "uploading":
+        nextState.selectedFile = info.file;
+        nextState.id = [info.file];
+        setFileList1((prev) => ({ ...prev, [key]: info.file }));
+        break;
+      case "done":
+        nextState.selectedFile = info.file;
+        nextState.id = [info.file];
+        setFileList1((prev) => ({ ...prev, [key]: info.file }));
+        break;
+
+      default:
+        // error or removed
+        nextState.selectedFile = null;
+        nextState.id = [];
+        setFileList1((prev) => ({ ...prev, [key]: null }));
+    }
+  };
+
   const beforeUpload = (file) => {
     const isLt2M = file.size / 1024 / 1024 < 30000;
     // console.log(isLt2M, file.size,)
@@ -117,9 +140,12 @@ const PartnerRegistration = () => {
     form.validateFields().then(async (values) => {
       setLoader(true);
       const formData = new FormData();
-      formData.append("property", JSON.stringify({
-        ...values
-      }));
+      formData.append(
+        "property",
+        JSON.stringify({
+          ...values,
+        })
+      );
       console.log(formData);
       for (const [key, value] of formData.entries()) {
         console.log(`Key: ${key}, Value: ${value}`);
@@ -194,7 +220,11 @@ const PartnerRegistration = () => {
             <Input placeholder="State" />
           </Form.Item>
           <Form.Item label="" name="approvalstatus">
-            <Input value={"UNDER_REVIEW"} disabled={true} placeholder="Approval Status" />
+            <Input
+              value={"UNDER_REVIEW"}
+              disabled={true}
+              placeholder="Approval Status"
+            />
           </Form.Item>
           <Form.Item label="" name="propertyNo">
             <InputNumber placeholder="Property Number" />
@@ -236,7 +266,7 @@ const PartnerRegistration = () => {
               maxCount={2}
               beforeUpload={beforeUpload}
               customRequest={dummyRequest}
-            // accept={ImageFileFormat}
+              // accept={ImageFileFormat}
             >
               <Button icon={<UploadOutlined />}>Click to upload</Button>
             </Upload>
@@ -250,12 +280,12 @@ const PartnerRegistration = () => {
           >
             <Upload
               name="logo"
-              onChange={(p) => onChangeFile(p, "doc_1")}
+              onChange={(p) => onChangeFile1(p, "doc_2")}
               fileList={[formFileData?.doc_1]}
               maxCount={1}
               beforeUpload={beforeUpload}
               customRequest={dummyRequest}
-            // accept={ImageFileFormat}
+              // accept={ImageFileFormat}
             >
               <Button icon={<UploadOutlined />}>Click to upload</Button>
             </Upload>
