@@ -1,0 +1,19 @@
+.partnerapprHead .ant-table-thead {
+  height: 4em !important;
+}
+
+.partnerapprHead .ant-table-cell {
+  text-align: center !important;
+}
+
+.fitcontent {
+  height: auto;
+}
+
+.ant-picker.ant-picker-range {
+  height: -webkit-fill-available;
+  padding: 0 10px !important;
+}
+.partnerapprHead .ant-select {
+  width: -webkit-fill-available;
+}

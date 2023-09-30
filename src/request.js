@@ -95,6 +95,34 @@ class Request {
     });
   }
 
+  getPartnerApproval() {
+    return new Promise((next, error) => {
+      authAxios
+        .get("/property/fetchAll")
+        .then((d) => {
+          next(d.data);
+        })
+        .catch((err) => {
+          next(err.response.data);
+          this.error(err);
+        });
+    });
+  }
+
+  setPartnerApproval(data) {
+    return new Promise((next, error) => {
+      authAxios
+        .post("/property/updateApprovalStatus", { ...data })
+        .then((d) => {
+          next(d.data);
+        })
+        .catch((err) => {
+          next(err.response.data);
+          this.error(err);
+        });
+    });
+  }
+
   fetchReport(id) {
     return new Promise((next, error) => {
       authAxios

@@ -29,7 +29,6 @@ const HeaderMenu = () => {
       ]}
       className="MenuItem"
       theme="dark"
-      inlineCollapsed={false}
       defaultSelectedKeys={["1"]}
       mode="horizontal"
     >
